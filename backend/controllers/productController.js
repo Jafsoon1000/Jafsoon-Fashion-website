@@ -2,7 +2,18 @@ import Product from "../models/Product.js";
 
 export async function getProducts(req, res) {
   try {
-    const products = await Product.find({});
+    const { keyword, category } = req.query;
+    
+    // Add fuzzy search and filtering
+    const query = {};
+    if (keyword) {
+      query.name = { $regex: keyword, $options: "i" };
+    }
+    if (category) {
+      query.category = category;
+    }
+
+    const products = await Product.find(query);
     return res.json(products);
   } catch (error) {
     return res.status(500).json({ error: "Failed to fetch products" });
