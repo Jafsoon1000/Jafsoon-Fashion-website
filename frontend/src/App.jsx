@@ -17,6 +17,8 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import VerifyPhone from "./pages/VerifyPhone";
 import Profile from "./pages/Profile";
+import OrderSuccess from "./pages/OrderSuccess";
+import AdminProducts from "./pages/AdminProducts";
 import NotFound from "./pages/NotFound";
 
 export default function App() {
@@ -36,6 +38,7 @@ export default function App() {
             <Route path="/blog" element={<Blog />} />
             <Route path="/cart" element={<Cart />} />
             <Route path="/checkout" element={<Checkout />} />
+            <Route path="/order-success" element={<OrderSuccess />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
             <Route path="/verify-phone" element={<VerifyPhone />} />
@@ -44,6 +47,14 @@ export default function App() {
               element={
                 <ProtectedRoute>
                   <Profile />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/admin/products"
+              element={
+                <ProtectedRoute>
+                  <AdminProducts />
                 </ProtectedRoute>
               }
             />
