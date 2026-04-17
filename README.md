@@ -8,6 +8,9 @@ A premium, full-stack e-commerce experience built for modern fashion brands. Vel
 
 - **🛍️ Complete Shopping Flow**: Persistent cart management, dynamic product listing, and a multi-step checkout experience.
 - **🔍 Advanced Search & Filter**: Real-time product searching and category-based filtering.
+- **💖 Wishlist System**: Users can save their favorite items for later with instant localStorage persistence.
+- **⭐ Product Reviews & Ratings**: Full feedback system with star ratings and customer comments.
+- **📦 Order Tracking**: Personal profile page with a complete history of past purchases and statuses.
 - **🔐 Secure Authentication**: JWT-based login/register with route protection.
 - **🌗 Dynamic Theming**: Smooth transition between light and obsidian-dark modes.
 - **📱 Responsive Design**: Fully optimized for mobile, tablet, and desktop viewing.
@@ -15,7 +18,7 @@ A premium, full-stack e-commerce experience built for modern fashion brands. Vel
 
 ## 🚀 Tech Stack
 
-- **Frontend**: React 18, Vite, React Router 6, Context API (for Auth & Cart).
+- **Frontend**: React 18, Vite, React Router 6, Context API (Auth, Cart, & Wishlist).
 - **Backend**: Node.js, Express, MongoDB/Mongoose.
 - **Styling**: Vanilla CSS with HSL variables and CSS Grid/Flexbox.
 - **Auth**: JSON Web Tokens (JWT).
@@ -52,15 +55,15 @@ npm run dev
 ```text
 ├── backend
 │   ├── controllers     # Business logic
-│   ├── models          # Mongoose schemas
+│   ├── models          # Mongoose schemas (User, Product, Order)
 │   ├── routes          # API endpoints
 │   └── server.js      # Entry point
 ├── frontend
 │   ├── src
-│   │   ├── components  # Reusable UI elements
-│   │   ├── context     # Global state (Cart, Auth)
-│   │   ├── pages       # Route components
-│   │   └── styles.css  # Global design system
+│   │   ├── components  # Navbar, Footer (with Newsletter)
+│   │   ├── context     # Global state (Cart, Auth, Wishlist)
+│   │   ├── pages       # Route components (Shop, Wishlist, Profile, etc.)
+│   │   └── styles.css  # Premium design system
 └── README.md
 ```
 
