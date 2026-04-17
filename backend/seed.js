@@ -42,7 +42,7 @@ const products = [
     price: 240,
     description: "Multi-pocket technical jacket with weather-sealed zippers. Functional urban aesthetic.",
     category: "streetwear",
-    image: "https://images.unsplash.com/photo-1544022613-e87c07917eb1?q=80&w=1000&auto=format&fit=crop",
+    image: "https://images.unsplash.com/photo-1604644401890-0bd678c83788?auto=format&fit=crop&q=80&w=1000",
     stock: 5
   },
   {
