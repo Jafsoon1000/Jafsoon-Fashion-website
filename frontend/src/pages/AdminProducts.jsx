@@ -24,7 +24,7 @@ export default function AdminProducts() {
   };
 
   return (
-    <section className="admin-page">
+    <section>
       <div className="admin-header">
         <h2>Admin: Manage Products</h2>
         <button className="btn-primary">Add New Product</button>

@@ -19,6 +19,11 @@ import VerifyPhone from "./pages/VerifyPhone";
 import Profile from "./pages/Profile";
 import OrderSuccess from "./pages/OrderSuccess";
 import AdminProducts from "./pages/AdminProducts";
+import AdminDashboard from "./pages/AdminDashboard";
+import AdminOrders from "./pages/AdminOrders";
+import AdminUsers from "./pages/AdminUsers";
+import AdminRoute from "./components/AdminRoute";
+import AdminLayout from "./components/AdminLayout";
 import Wishlist from "./pages/Wishlist";
 import NotFound from "./pages/NotFound";
 import { WishlistProvider } from "./context/WishlistContext";
@@ -58,12 +63,20 @@ export default function App() {
                       </ProtectedRoute>
                     }
                   />
+                  {/* Admin Routes wrapped in Layout */}
                   <Route
-                    path="/admin/products"
+                    path="/admin/*"
                     element={
-                      <ProtectedRoute>
-                        <AdminProducts />
-                      </ProtectedRoute>
+                      <AdminRoute>
+                        <AdminLayout>
+                          <Routes>
+                            <Route path="dashboard" element={<AdminDashboard />} />
+                            <Route path="orders" element={<AdminOrders />} />
+                            <Route path="users" element={<AdminUsers />} />
+                            <Route path="products" element={<AdminProducts />} />
+                          </Routes>
+                        </AdminLayout>
+                      </AdminRoute>
                     }
                   />
                   <Route path="*" element={<NotFound />} />

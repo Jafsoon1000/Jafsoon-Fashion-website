@@ -41,3 +41,36 @@ export async function getMyOrders(req, res) {
     return res.status(500).json({ error: "Failed to fetch user orders" });
   }
 }
+
+// @desc    Get all orders
+// @route   GET /api/orders
+// @access  Private/Admin
+export async function getOrders(req, res) {
+  try {
+    const orders = await Order.find({}).populate("user", "id name");
+    res.json(orders);
+  } catch (error) {
+    res.status(500).json({ error: "Failed to fetch all orders" });
+  }
+}
+
+// @desc    Update order to delivered
+// @route   PUT /api/orders/:id/deliver
+// @access  Private/Admin
+export async function updateOrderToDelivered(req, res) {
+  try {
+    const order = await Order.findById(req.params.id);
+
+    if (order) {
+      order.isDelivered = true;
+      order.deliveredAt = Date.now();
+
+      const updatedOrder = await order.save();
+      res.json(updatedOrder);
+    } else {
+      res.status(404).json({ error: "Order not found" });
+    }
+  } catch (error) {
+    res.status(500).json({ error: "Failed to update order status" });
+  }
+}
