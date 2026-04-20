@@ -10,7 +10,7 @@ export default function Home() {
     fetch("http://localhost:5000/api/products")
       .then((res) => res.json())
       .then((data) => {
-        setTrending(data.slice(0, 4));
+        setTrending(data.products.slice(0, 4));
         setLoading(false);
       })
       .catch(() => setLoading(false));

@@ -2,9 +2,11 @@ import Product from "../models/Product.js";
 
 export async function getProducts(req, res) {
   try {
-    const { keyword, category } = req.query;
+    const { keyword, category, minPrice, maxPrice, sort, pageNumber } = req.query;
     
-    // Add fuzzy search and filtering
+    const pageSize = 12;
+    const page = Number(pageNumber) || 1;
+
     const query = {};
     if (keyword) {
       query.name = { $regex: keyword, $options: "i" };
@@ -12,9 +14,30 @@ export async function getProducts(req, res) {
     if (category) {
       query.category = category;
     }
+    if (minPrice || maxPrice) {
+      query.price = {};
+      if (minPrice) query.price.$gte = Number(minPrice);
+      if (maxPrice) query.price.$lte = Number(maxPrice);
+    }
 
-    const products = await Product.find(query);
-    return res.json(products);
+    let sortOption = {};
+    if (sort === "price_asc") {
+      sortOption = { price: 1 };
+    } else if (sort === "price_desc") {
+      sortOption = { price: -1 };
+    } else if (sort === "rating_desc") {
+      sortOption = { rating: -1 };
+    } else {
+      sortOption = { createdAt: -1 };
+    }
+
+    const count = await Product.countDocuments(query);
+    const products = await Product.find(query)
+      .sort(sortOption)
+      .limit(pageSize)
+      .skip(pageSize * (page - 1));
+
+    return res.json({ products, page, pages: Math.ceil(count / pageSize), totalProducts: count });
   } catch (error) {
     return res.status(500).json({ error: "Failed to fetch products" });
   }

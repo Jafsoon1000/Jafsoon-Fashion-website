@@ -903,5 +903,149 @@ a:hover {
   }
 }
 
+/* Advanced Shop Page */
+.shop-layout {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: 3rem;
+  align-items: start;
+}
 
+@media (max-width: 900px) {
+  .shop-layout {
+    grid-template-columns: 1fr;
+  }
+}
 
+.shop-sidebar {
+  padding: 2rem;
+  position: sticky;
+  top: 100px;
+}
+
+.shop-sidebar h3 {
+  margin-top: 0;
+  margin-bottom: 2rem;
+  font-size: 1.5rem;
+}
+
+.filter-group {
+  margin-bottom: 2rem;
+}
+
+.filter-group h4 {
+  font-size: 1rem;
+  margin-bottom: 1rem;
+  color: var(--accent);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.category-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.sidebar-btn {
+  background: transparent;
+  border: none;
+  text-align: left;
+  padding: 0.5rem;
+  font-family: inherit;
+  font-size: 1rem;
+  color: var(--text);
+  opacity: 0.7;
+  cursor: pointer;
+  border-radius: 8px;
+  transition: all 0.2s;
+}
+
+.sidebar-btn:hover, .sidebar-btn.active {
+  opacity: 1;
+  background: rgba(0,0,0,0.05);
+  font-weight: 600;
+}
+
+[data-theme="dark"] .sidebar-btn:hover, 
+[data-theme="dark"] .sidebar-btn.active {
+  background: rgba(255,255,255,0.05);
+}
+
+.filter-divider {
+  border: none;
+  border-top: 1px solid var(--border);
+  margin: 2rem 0;
+}
+
+.price-inputs {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.price-inputs input {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--bg);
+  color: var(--text);
+  outline: none;
+}
+
+.shop-filters-row {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.sort-select {
+  padding: 0.75rem 1.25rem;
+  border-radius: 99px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text);
+  outline: none;
+  cursor: pointer;
+  font-family: inherit;
+  font-weight: 500;
+}
+
+.rating-row {
+  font-size: 0.85rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 0.25rem;
+}
+
+.review-count {
+  opacity: 0.6;
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-top: 4rem;
+}
+
+.empty-state {
+  text-align: center;
+  padding: 4rem;
+  background: var(--surface);
+  border-radius: 20px;
+  border: 1px solid var(--border);
+}
+
+.empty-state h3 {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.empty-state p {
+  opacity: 0.7;
+  margin-bottom: 2rem;
+}
