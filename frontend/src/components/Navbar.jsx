@@ -1,6 +1,6 @@
 import { Link, NavLink } from "react-router-dom";
-import { useAuth } from "../context/AuthContext";
-import { useTheme } from "../context/ThemeContext";
+import { useAuthStore } from "../store/useAuthStore";
+import { useThemeStore } from "../store/useThemeStore";
 
 const navItems = [
   { to: "/", label: "Home" },
@@ -12,8 +12,8 @@ const navItems = [
 ];
 
 export default function Navbar() {
-  const { user, logout } = useAuth();
-  const { isDarkMode, toggleTheme } = useTheme();
+  const { user, logout } = useAuthStore();
+  const { isDarkMode, toggleTheme } = useThemeStore();
 
   return (
     <header className="navbar">

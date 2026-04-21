@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import ScrollReveal from "../components/ScrollReveal";
+import ScrollReveal from "../../components/ScrollReveal";
 
 export default function Home() {
   const [trending, setTrending] = useState([]);

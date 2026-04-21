@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { useAuth } from "../context/AuthContext";
+import { useAuthStore } from "../../store/useAuthStore";
 
 export default function VerifyPhone() {
-  const { sendOtp, verifyPhone, user } = useAuth();
+  const { sendOtp, verifyPhone, user } = useAuthStore();
   const location = useLocation();
   const navigate = useNavigate();
   const [phoneNumber, setPhoneNumber] = useState(location.state?.phoneNumber || user?.phoneNumber || "");

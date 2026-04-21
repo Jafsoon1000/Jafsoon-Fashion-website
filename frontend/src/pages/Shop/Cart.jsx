@@ -1,8 +1,8 @@
 import { Link } from "react-router-dom";
-import { useCart } from "../context/CartContext";
+import { useCartStore } from "../../store/useCartStore";
 
 export default function Cart() {
-  const { cartItems, removeFromCart, updateQuantity, itemsPrice } = useCart();
+  const { cartItems, removeFromCart, updateQuantity, itemsPrice } = useCartStore();
 
   return (
     <section className="cart-page">

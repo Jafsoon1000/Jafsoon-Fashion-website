@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { useWishlist } from "../context/WishlistContext";
-import { useCart } from "../context/CartContext";
+import { useWishlistStore } from "../../store/useWishlistStore";
+import { useCartStore } from "../../store/useCartStore";
 
 export default function Shop() {
-  const { wishlistItems, addToWishlist, removeFromWishlist, isInWishlist } = useWishlist();
-  const { addToCart } = useCart();
+  const { wishlistItems, addToWishlist, removeFromWishlist, isInWishlist } = useWishlistStore();
+  const { addToCart } = useCartStore();
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   

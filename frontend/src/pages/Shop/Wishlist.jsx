@@ -1,10 +1,10 @@
-import { useWishlist } from "../context/WishlistContext";
+import { useWishlistStore } from "../../store/useWishlistStore";
 import { Link } from "react-router-dom";
-import { useCart } from "../context/CartContext";
+import { useCartStore } from "../../store/useCartStore";
 
 export default function Wishlist() {
-  const { wishlistItems, removeFromWishlist } = useWishlist();
-  const { addToCart } = useCart();
+  const { wishlistItems, removeFromWishlist } = useWishlistStore();
+  const { addToCart } = useCartStore();
 
   return (
     <section className="wishlist-page">
