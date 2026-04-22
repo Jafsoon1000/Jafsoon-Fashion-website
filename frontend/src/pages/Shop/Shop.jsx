@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { useWishlistStore } from "../../store/useWishlistStore";
 import { useCartStore } from "../../store/useCartStore";
 import StarRating from "../../components/StarRating";
@@ -7,6 +7,8 @@ import StarRating from "../../components/StarRating";
 export default function Shop() {
   const { wishlistItems, addToWishlist, removeFromWishlist, isInWishlist } = useWishlistStore();
   const { addToCart } = useCartStore();
+  const location = useLocation();
+
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   
@@ -20,7 +22,13 @@ export default function Shop() {
   const [pages, setPages] = useState(1);
   const [totalProducts, setTotalProducts] = useState(0);
 
-  const categories = ["Dresses", "Top", "Outerwear", "Accessories", "Shoes"];
+  const categories = ["Women", "Men", "Dresses", "Top", "Outerwear", "Accessories", "Shoes", "New Arrivals", "Sale"];
+
+  useEffect(() => {
+    const params = new URLSearchParams(location.search);
+    if (params.has("category")) setCategory(params.get("category"));
+    if (params.has("keyword")) setKeyword(params.get("keyword"));
+  }, [location.search]);
 
   useEffect(() => {
     const fetchProducts = async () => {
