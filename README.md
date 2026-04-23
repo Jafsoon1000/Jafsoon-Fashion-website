@@ -1,8 +1,8 @@
-# 👗 Veloura Fashion Store
+# 👗 Jafsoon Fashion Store
 
-A premium, full-stack e-commerce experience built for modern fashion brands. Veloura combines a sleek obsidian-dark aesthetic with a robust Mongoose/Express backend and a responsive React frontend.
+A premium, full-stack e-commerce experience built for modern fashion brands. Jafsoon combines a sleek obsidian-dark aesthetic with a robust Mongoose/Express backend and a responsive React frontend.
 
-![Veloura Banner](https://images.unsplash.com/photo-1490481651871-ab68de25d43d?auto=format&fit=crop&q=80&w=1200&h=400)
+![Jafsoon Banner](https://images.unsplash.com/photo-1490481651871-ab68de25d43d?auto=format&fit=crop&q=80&w=1200&h=400)
 
 ## ✨ Key Features
 
@@ -32,8 +32,8 @@ A premium, full-stack e-commerce experience built for modern fashion brands. Vel
 
 ### 1. Clone the repository
 ```bash
-git clone https://github.com/Jafsoon1000/Veloura-Fashion-website.git
-cd Veloura-Fashion-website
+git clone https://github.com/Jafsoon1000/Jafsoon-Fashion-website.git
+cd Jafsoon-Fashion-website
 ```
 
 ### 2. Setup Backend

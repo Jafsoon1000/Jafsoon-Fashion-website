@@ -1,4 +1,6 @@
 import { Route, Routes } from "react-router-dom";
+import { useEffect } from "react";
+import { useThemeStore } from "./store/useThemeStore";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import ProtectedRoute from "./components/ProtectedRoute";
@@ -28,6 +30,12 @@ import Wishlist from "./pages/Shop/Wishlist";
 import NotFound from "./pages/Static/NotFound";
 
 export default function App() {
+  const { isDarkMode } = useThemeStore();
+
+  useEffect(() => {
+    document.documentElement.setAttribute("data-theme", isDarkMode ? "dark" : "light");
+  }, [isDarkMode]);
+
   return (
     <div className="app-shell">
       <Navbar />

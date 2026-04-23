@@ -17,7 +17,7 @@ app.use(cors());
 app.use(express.json());
 
 app.get("/", (req, res) => {
-  res.json({ status: "Veloura API running" });
+  res.json({ status: "Jafsoon API running" });
 });
 
 app.use("/api/auth", authRoutes);

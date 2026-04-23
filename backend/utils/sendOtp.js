@@ -12,7 +12,7 @@ export async function sendOtpSms(phoneNumber, code) {
 
   const client = twilio(sid, token);
   await client.messages.create({
-    body: `Your Veloura verification code is: ${code}`,
+    body: `Your Jafsoon verification code is: ${code}`,
     from,
     to: phoneNumber
   });

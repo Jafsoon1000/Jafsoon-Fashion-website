@@ -1,6 +1,6 @@
 @echo off
 echo ==========================================
-echo   Veloura Fashion Store - Setup Script
+echo   Jafsoon Fashion Store - Setup Script
 echo ==========================================
 
 echo.

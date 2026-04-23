@@ -1,6 +1,6 @@
-# Contributing to Veloura Fashion
+# Contributing to Jafsoon Fashion
 
-First off, thank you for considering contributing to Veloura! It's people like you that make the open-source community such an amazing place to learn, inspire, and create.
+First off, thank you for considering contributing to Jafsoon! It's people like you that make the open-source community such an amazing place to learn, inspire, and create.
 
 ## Code of Conduct
 

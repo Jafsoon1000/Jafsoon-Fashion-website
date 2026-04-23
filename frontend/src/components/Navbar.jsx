@@ -18,7 +18,7 @@ export default function Navbar() {
   return (
     <header className="navbar">
       <Link to="/" className="logo">
-        Veloura
+        Jafsoon
       </Link>
       <nav className="nav-links">
         {navItems.map((item) => (

@@ -155,10 +155,10 @@ export default function Home() {
             />
           </div>
           <div className="story-content card">
-            <p className="eyebrow">The Veloura Way</p>
+            <p className="eyebrow">The Jafsoon Way</p>
             <h2>Crafted with Precision, Worn with Pride.</h2>
             <p>
-              Founded in 2024, Veloura was born from a desire to bridge the gap 
+              Founded in 2024, Jafsoon was born from a desire to bridge the gap 
               between sustainable ethics and high-end fashion. Every piece in our 
               collection is designed in our London studio and crafted by artisans 
               who share our commitment to quality.

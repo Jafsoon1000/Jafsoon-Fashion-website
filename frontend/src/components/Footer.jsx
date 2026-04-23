@@ -3,7 +3,7 @@ export default function Footer() {
     <footer className="footer">
       <div className="footer-content grid">
         <div className="footer-brand">
-          <h3>Veloura</h3>
+          <h3>Jafsoon</h3>
           <p>Elevating your style with curated fashion pieces that define elegance and comfort.</p>
           <div className="social-links">
             <a href="#" aria-label="Instagram">📸</a>
@@ -32,7 +32,7 @@ export default function Footer() {
         </div>
       </div>
       <div className="footer-bottom">
-        <p>&copy; {new Date().getFullYear()} Veloura Fashion. All rights reserved.</p>
+        <p>&copy; {new Date().getFullYear()} Jafsoon Fashion. All rights reserved.</p>
       </div>
     </footer>
   );
