@@ -1,13 +1,16 @@
 import { useEffect, useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useWishlistStore } from "../../store/useWishlistStore";
 import { useCartStore } from "../../store/useCartStore";
+import { useAuthStore } from "../../store/useAuthStore";
 import StarRating from "../../components/StarRating";
 
 export default function Shop() {
   const { wishlistItems, addToWishlist, removeFromWishlist, isInWishlist } = useWishlistStore();
   const { addToCart } = useCartStore();
+  const { user } = useAuthStore();
   const location = useLocation();
+  const navigate = useNavigate();
 
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -163,7 +166,9 @@ export default function Shop() {
                 {products.map((product) => (
                   <article key={product._id} className="card product-card">
                     <div className="product-image">
-                      <img src={product.image} alt={product.name} />
+                      <Link to={`/product/${product._id}`} style={{ display: 'block', height: '100%' }}>
+                        <img src={product.image} alt={product.name} />
+                      </Link>
                       <button
                         className={`wishlist-btn ${isInWishlist(product._id) ? "active" : ""}`}
                         onClick={() =>
@@ -188,7 +193,13 @@ export default function Shop() {
                         </Link>
                         <button 
                           className="btn-primary" 
-                          onClick={() => addToCart(product, 1)}
+                          onClick={() => {
+                            if (!user) {
+                              navigate("/login?redirect=shop");
+                            } else {
+                              addToCart(product, 1);
+                            }
+                          }}
                           style={{flex: 1}}
                         >
                           Add to Cart

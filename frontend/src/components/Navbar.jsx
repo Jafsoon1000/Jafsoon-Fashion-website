@@ -1,6 +1,7 @@
 import { Link, NavLink } from "react-router-dom";
 import { useAuthStore } from "../store/useAuthStore";
 import { useThemeStore } from "../store/useThemeStore";
+import { useCartStore } from "../store/useCartStore";
 
 const navItems = [
   { to: "/", label: "Home" },
@@ -14,6 +15,7 @@ const navItems = [
 export default function Navbar() {
   const { user, logout } = useAuthStore();
   const { isDarkMode, toggleTheme } = useThemeStore();
+  const totalItems = useCartStore((state) => state.totalItems());
 
   return (
     <header className="navbar">
@@ -39,8 +41,23 @@ export default function Navbar() {
             </svg>
           )}
         </button>
-        <Link to="/cart" className="btn-outline">
+        <Link to="/cart" className="btn-outline" style={{ position: "relative" }}>
           Cart
+          {totalItems > 0 && (
+            <span style={{
+              position: "absolute",
+              top: "-8px",
+              right: "-8px",
+              backgroundColor: "var(--color-danger, #e74c3c)",
+              color: "white",
+              borderRadius: "50%",
+              padding: "2px 6px",
+              fontSize: "0.75rem",
+              fontWeight: "bold"
+            }}>
+              {totalItems}
+            </span>
+          )}
         </Link>
         {user ? (
           <>

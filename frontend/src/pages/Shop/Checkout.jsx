@@ -87,13 +87,32 @@ export default function Checkout() {
       });
 
       if (res.ok) {
-        clearCart();
-        navigate("/order-success");
+        const orderDataResult = await res.json();
+        
+        // Initiate Stripe Checkout
+        const stripeRes = await fetch("http://localhost:5000/api/payment/create-session", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+          body: JSON.stringify({ orderId: orderDataResult._id }),
+        });
+
+        const sessionData = await stripeRes.json();
+
+        if (stripeRes.ok && sessionData.url) {
+          // Redirect user to Stripe
+          window.location.href = sessionData.url;
+        } else {
+          alert(sessionData.error || "Payment Gateway Error. Please try again.");
+        }
       } else {
         alert("Failed to place order. Please try again.");
       }
     } catch (error) {
       console.error("Order error:", error);
+      alert("An error occurred. Please try again.");
     } finally {
       setIsProcessing(false);
     }

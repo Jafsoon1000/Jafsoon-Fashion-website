@@ -126,7 +126,9 @@ export default function Home() {
               {trending.map((product) => (
                 <article key={product._id} className="card product-card">
                   <div className="product-image">
-                    <img src={product.image} alt={product.name} />
+                    <Link to={`/product/${product._id}`} style={{ display: 'block', height: '100%' }}>
+                      <img src={product.image} alt={product.name} />
+                    </Link>
                   </div>
                   <div className="product-info">
                     <h3>{product.name}</h3>
