@@ -125,3 +125,45 @@ export async function verifyPhone(req, res) {
 export async function me(req, res) {
   return res.json({ user: req.user });
 }
+
+export async function socialLogin(req, res) {
+  try {
+    const { email, name } = req.body;
+    
+    if (!email) {
+      return res.status(400).json({ error: "Email is required for social login" });
+    }
+
+    let user = await User.findOne({ email });
+
+    if (!user) {
+      // Create a new user for social login
+      // We generate a random password since they authenticate via social
+      const randomPassword = Math.random().toString(36).slice(-8) + Math.random().toString(36).slice(-8);
+      const hashedPassword = await bcrypt.hash(randomPassword, 10);
+      
+      user = await User.create({
+        name: name || "User",
+        email,
+        password: hashedPassword,
+        // Optional fields might be missing for social login, setting defaults
+        phoneNumber: "SocialLogin-" + Date.now().toString().slice(-6),
+        isPhoneVerified: true // Assume social accounts are verified
+      });
+    }
+
+    const token = generateToken(user._id);
+    return res.json({
+      token,
+      user: {
+        id: user._id,
+        name: user.name,
+        email: user.email,
+        phoneNumber: user.phoneNumber,
+        isPhoneVerified: user.isPhoneVerified
+      }
+    });
+  } catch (error) {
+    return res.status(500).json({ error: "Server error during social login." });
+  }
+}

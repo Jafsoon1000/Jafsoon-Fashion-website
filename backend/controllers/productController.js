@@ -90,3 +90,21 @@ export async function createProductReview(req, res) {
     res.status(500).json({ error: "Server error while adding review" });
   }
 }
+
+export async function getRelatedProducts(req, res) {
+  try {
+    const product = await Product.findById(req.params.id);
+    if (!product) {
+      return res.status(404).json({ error: "Product not found" });
+    }
+
+    const relatedProducts = await Product.find({
+      _id: { $ne: product._id },
+      category: product.category,
+    }).limit(4);
+
+    return res.json(relatedProducts);
+  } catch (error) {
+    return res.status(500).json({ error: "Failed to fetch related products" });
+  }
+}

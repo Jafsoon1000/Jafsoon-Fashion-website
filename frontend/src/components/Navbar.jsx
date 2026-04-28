@@ -2,6 +2,7 @@ import { Link, NavLink } from "react-router-dom";
 import { useAuthStore } from "../store/useAuthStore";
 import { useThemeStore } from "../store/useThemeStore";
 import { useCartStore } from "../store/useCartStore";
+import CurrencySelector from "./CurrencySelector";
 
 const navItems = [
   { to: "/", label: "Home" },
@@ -29,7 +30,8 @@ export default function Navbar() {
           </NavLink>
         ))}
       </nav>
-      <div className="nav-actions">
+      <div className="nav-actions" style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+        <CurrencySelector />
         <button onClick={toggleTheme} className="theme-toggle" title="Toggle Night Mode" aria-label="Toggle Night Mode">
           {isDarkMode ? (
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">

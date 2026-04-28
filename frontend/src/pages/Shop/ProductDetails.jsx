@@ -4,6 +4,7 @@ import { useCartStore } from "../../store/useCartStore";
 import { useWishlistStore } from "../../store/useWishlistStore";
 import { useAuthStore } from "../../store/useAuthStore";
 import StarRating from "../../components/StarRating";
+import { useFormattedPrice } from "../../utils/formatPrice";
 
 export default function ProductDetails() {
   const { id } = useParams();
@@ -12,17 +13,24 @@ export default function ProductDetails() {
   const { addToWishlist, removeFromWishlist, isInWishlist } = useWishlistStore();
   const { user } = useAuthStore();
   const [product, setProduct] = useState(null);
+  const [relatedProducts, setRelatedProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [qty, setQty] = useState(1);
   const [rating, setRating] = useState(5);
   const [comment, setComment] = useState("");
   const [submitting, setSubmitting] = useState(false);
+  const formatPrice = useFormattedPrice();
 
   useEffect(() => {
-    fetch(`http://localhost:5000/api/products/${id}`)
-      .then((res) => res.json())
-      .then((data) => {
-        setProduct(data);
+    window.scrollTo(0, 0);
+    setLoading(true);
+    Promise.all([
+      fetch(`http://localhost:5000/api/products/${id}`).then(res => res.json()),
+      fetch(`http://localhost:5000/api/products/${id}/related`).then(res => res.json())
+    ])
+      .then(([productData, relatedData]) => {
+        setProduct(productData);
+        setRelatedProducts(relatedData);
         setLoading(false);
       })
       .catch(() => setLoading(false));
@@ -79,7 +87,7 @@ export default function ProductDetails() {
           </div>
           <p className="category">{product.category}</p>
           <p className="description">{product.description}</p>
-          <p className="price">Price: ${product.price}</p>
+          <p className="price">Price: {formatPrice(product.price)}</p>
           
           <div className="qty-selector">
             <label>Quantity:</label>
@@ -160,6 +168,23 @@ export default function ProductDetails() {
           )}
         </div>
       </div>
+
+      {relatedProducts.length > 0 && (
+        <div className="related-products card" style={{ marginTop: "2rem", padding: "2rem" }}>
+          <h3 style={{ marginBottom: "1.5rem" }}>You Might Also Like</h3>
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(200px, 1fr))", gap: "1.5rem" }}>
+            {relatedProducts.map(rp => (
+              <Link to={`/product/${rp._id}`} key={rp._id} style={{ textDecoration: "none", color: "inherit" }} className="related-product-card card hover-scale">
+                <img src={rp.image} alt={rp.name} style={{ width: "100%", height: "200px", objectFit: "cover", borderRadius: "8px 8px 0 0" }} />
+                <div style={{ padding: "1rem" }}>
+                  <h4 style={{ fontSize: "1.1rem", marginBottom: "0.5rem" }}>{rp.name}</h4>
+                  <p style={{ color: "var(--primary-color)", fontWeight: "bold" }}>{formatPrice(rp.price)}</p>
+                </div>
+              </Link>
+            ))}
+          </div>
+        </div>
+      )}
     </section>
   );
 }
