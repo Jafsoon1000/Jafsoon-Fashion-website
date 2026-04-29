@@ -32,10 +32,6 @@ import NotFound from "./pages/Static/NotFound";
 export default function App() {
   const { isDarkMode } = useThemeStore();
 
-  useEffect(() => {
-    document.documentElement.setAttribute("data-theme", isDarkMode ? "dark" : "light");
-  }, [isDarkMode]);
-
   return (
     <div className="app-shell">
       <Navbar />
