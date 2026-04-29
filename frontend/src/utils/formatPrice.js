@@ -1,31 +1,19 @@
 import { useCurrencyStore } from "../store/useCurrencyStore";
 
-const getCurrencySymbol = (currency) => {
-  switch (currency) {
-    case 'USD': return '$';
-    case 'EUR': return '€';
-    case 'GBP': return '£';
-    case 'JPY': return '¥';
-    case 'AUD': return 'A$';
-    case 'CAD': return 'C$';
-    default: return '$';
-  }
-};
-
 export const formatPrice = (priceInUSD, currency, rates) => {
   if (!rates || !rates[currency]) {
-    return `$${Number(priceInUSD).toFixed(2)}`;
+    return new Intl.NumberFormat('en-US', {
+      style: 'currency',
+      currency: 'USD',
+    }).format(priceInUSD);
   }
   
   const converted = priceInUSD * rates[currency];
-  const symbol = getCurrencySymbol(currency);
   
-  // JPY typically doesn't use decimals
-  if (currency === 'JPY') {
-    return `${symbol}${Math.round(converted)}`;
-  }
-  
-  return `${symbol}${converted.toFixed(2)}`;
+  return new Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency: currency,
+  }).format(converted);
 };
 
 // Helper hook to easily get a formatted price
