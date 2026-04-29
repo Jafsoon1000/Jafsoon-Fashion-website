@@ -10,11 +10,16 @@ export async function sendOtpSms(phoneNumber, code) {
     return { mode: "dev" };
   }
 
-  const client = twilio(sid, token);
-  await client.messages.create({
-    body: `Your Jafsoon verification code is: ${code}`,
-    from,
-    to: phoneNumber
-  });
-  return { mode: "sms" };
+  try {
+    const client = twilio(sid, token);
+    await client.messages.create({
+      body: `Your Jafsoon verification code is: ${code}`,
+      from,
+      to: phoneNumber
+    });
+    return { mode: "sms" };
+  } catch (error) {
+    console.error(`[TWILIO ERROR] Failed to send OTP to ${phoneNumber}:`, error.message);
+    throw new Error("Twilio SMS failed");
+  }
 }
